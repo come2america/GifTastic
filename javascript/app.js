@@ -33,7 +33,10 @@ function displaygif() {
       var gifindex = response.data[y]
       var gifurl = gifindex.images.original_still.url
       var moving = gifindex.images.original.url
+      var rating= $("<p>" +gifindex.rating + "</p>")
       var urlimg = $("<img>")
+
+
 
       urlimg.attr({
         src: gifurl,
@@ -45,24 +48,25 @@ function displaygif() {
       });
       console.log(gifurl)
       $("#gif-view").append(urlimg)
-
+      $("#gif-view").append(rating)
 
 
     }
     $(".gif").on("click", function () {
       var state = $(this).attr("data-state");
-      var stillimg = gifurl
+      console.log(state)
+      var stillimg = $(this).attr("data-still")
       var animeimg = $(this).attr("data-animate");
       if (state === "still") {
         $(this).attr({
           src: animeimg,
-
+      "data-state":"animate"
         })
       }
-      else if(state !== "still") {
+      else {
         $(this).attr({
           src: stillimg,
-          
+        "data-state": "still"
         })
       }
 
