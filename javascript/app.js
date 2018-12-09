@@ -7,19 +7,6 @@ function makebuttons() {
     $("#topic-view").append("<button class='topicbtn' data-index = '" + topics[i] + "'>" + topics[i] + "</button>")
   }
 }
-//click add genre and add user input to array
-
-
-$("#newgenre").on("click", function () {
-
-  event.preventDefault();
-  topics.push($("#genre-input").val())
-
-  makebuttons();
-})
-makebuttons();
-//click genre button and log name
-
 function displaygif() {
   var genreclick = $(this).attr("data-index");
 
@@ -56,11 +43,16 @@ function displaygif() {
         $("#gif-view").prepend(rating)
 
       }
+       $(".gif").on("click", function () {
+
+
+            gifclick(response)
+          })
+
     }
 
     caller(response);
- 
-    
+
   })
 
   $("#gif-view").empty()
@@ -84,15 +76,17 @@ function gifclick() {
     })
   }
 }
-// requestCallback.addCallbackToQueue(true, function(){
- gifclick()
+
+
+$(document).on("click", ".topicbtn", displaygif)
+$(document).on("click", ".gif", gifclick)
 $("#moregifs").on("click", function () {
   var genreclick = $(this).attr("data-index");
   console.log(genreclick);
 
   console.log(genreclick)
   var limit = []
-  for (var t =0; t < limit.length; t++) {
+  for (var t = 0; t < limit.length; t++) {
     limit++
   }
   var apikey = "7yn3Gabn0tV3wVegCwNyfuz1Bnknx9Nm"
@@ -102,50 +96,57 @@ $("#moregifs").on("click", function () {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (result) {
+  }).then(function (response) {
     function caller2() {
-      console.log(result)
-      for (var z = 0; z < result.data.length; z++) {
-        var ngifindex = result.data[z]
+      console.log(response)
+      for (var z = 0; z < response.data.length; z++) {
+        var ngifindex = response.data[z]
         var ngifurl = ngifindex.images.original_still.url
         var nmoving = ngifindex.images.original.url
         var nrating = $("<p>" + ngifindex.rating + "</p>")
         var nurlimg = $("<img>")
-
+        nurlimg.attr({
+          class: "gif",
+          "data-state": "still",
+        });
         nurlimg.attr({
           src: ngifurl,
           "data-still": ngifurl,
           "data-animate": nmoving,
 
-          "data-state": "still",
-          class: "gif ",
+
+
         });
         console.log(ngifurl)
         $("#gif-view").append(nurlimg)
         $("#gif-view").append(nrating)
 
       }
- 
+
+
     }
+
+    caller2(response);
+
+  })
+  $("#gif-view").empty()
+
+
   
-    caller2(result);
-
-    $(".gif").on("click", function () {
-
-      
-
-      gifclick()
-    })
 
 })
- $("#gif-view").empty() 
-  
- })
+$("#newgenre").on("click", function () {
+
+  event.preventDefault();
+  topics.push($("#genre-input").val())
+
+  makebuttons();
+  $("#form")[0].reset();
+})
+makebuttons();
 
 
 
 //end display           
 
-
-$(document).on("click", ".topicbtn", displaygif)
 
