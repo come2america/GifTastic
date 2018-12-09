@@ -15,7 +15,7 @@ function displaygif() {
 
 
   var apikey = "7yn3Gabn0tV3wVegCwNyfuz1Bnknx9Nm"
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + genreclick + " &api_key=" + apikey + "&limit=10"
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + genreclick + " &api_key=" + apikey + "&limit=10"
   console.log(genreclick)
   $.ajax({
     url: queryURL,
@@ -90,7 +90,7 @@ $("#moregifs").on("click", function () {
     limit++
   }
   var apikey = "7yn3Gabn0tV3wVegCwNyfuz1Bnknx9Nm"
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + genreclick + " &api_key=" + apikey + "&limit=" + limit[t]
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + genreclick + " &api_key=" + apikey + "&limit=" + limit[t]
 
 
   $.ajax({
