@@ -10,4 +10,13 @@ p {
     
 h1{
     text-align: center;
+    color: white;
 }
+body {
+    background-image: url("https://developers.giphy.com/static/img/api.c99e353f761d.gif");
+    background-color: #cccccc;
+ }
+ .sticky-bottom{
+    position: relative
+ }
+ 
